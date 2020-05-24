@@ -16,27 +16,27 @@ HOMEPAGE="http://www.logitechsqueezebox.com/support/download-squeezebox-server.h
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="lame wavpack musepack alac ogg flac avahi aac bonjour"
+IUSE="lame wavpack musepack alac ogg flac avahi aac"
 SRC_URI="http://downloads.slimdevices.com/nightly/8.0/lms/${HASHID}/logitechmediaserver-8.0.0-${BUILD_NUM}-noCPAN.tgz"
 
 RUN_UID=logitechmediaserver
 RUN_GID=logitechmediaserver
 
 COMMON_DEPS="
-    acct-user/${RUN_UID}
-    acct-group/${RUN_GID}
-    "
+	acct-user/${RUN_UID}
+	acct-group/${RUN_GID}
+	"
 # Note: common-sense currently required due to bundled EV (Gentoo bug#287257)
 DEPEND="
-    !media-sound/squeezecenter
-    !media-sound/squeezeboxserver
-    !media-sound/logitechmediaserver-bin
-    virtual/logger
-    virtual/mysql
-    avahi? ( net-dns/avahi )
-     >=dev-perl/common-sense-2.01
-    "
-    
+	!media-sound/squeezecenter
+	!media-sound/squeezeboxserver
+	!media-sound/logitechmediaserver-bin
+	virtual/logger
+	virtual/mysql
+	avahi? ( net-dns/avahi )
+	>=dev-perl/common-sense-2.01
+	"
+
 # Note: dev-perl/GD necessary because of SC bug#6143
 # (http://bugs.slimdevices.com/show_bug.cgi?id=6143).
 RDEPEND="
@@ -48,7 +48,7 @@ RDEPEND="
 	>=dev-perl/Data-Page-2.20.0-r1
 	>=dev-perl/GD-2.41
 	>=dev-perl/UUID-Tiny-1.40.0
-	>=dev-perl/Network-IPv4Addr-0.05
+	>=dev-perl/Net-IPv4Addr-0.100.0
 	>=dev-perl/SOAP-Lite-1.040
 	>=dev-perl/File-BOM-0.140.0
 	>=dev-perl/JSON-XS-VersionOneAndTwo-0.310.0
@@ -113,12 +113,11 @@ RDEPEND="
 	>=dev-perl/Class-C3-0.21
 	>=dev-perl/Class-C3-Componentised-1.0006
 	>=dev-perl/File-ReadBackwards-1.04
-    =dev-perl/Audio-Scan-0.930.0	
+	>=dev-perl/Audio-Scan-0.930.0
 	>=dev-perl/PAR-1.10.0
 	lame? ( media-sound/lame )
 	alac? ( media-sound/alac_decoder )
 	wavpack? ( media-sound/wavpack )
-	bonjour? ( net-misc/mDNSResponder )
 	flac? (
 		media-libs/flac
 		media-sound/sox[flac]
@@ -127,7 +126,7 @@ RDEPEND="
 	aac? ( media-libs/faad2 )
 	"
 
-S="${WORKDIR}/logitechmediaserver-7.9.2-${BUILD_NUM}-noCPAN"
+S="${WORKDIR}/logitechmediaserver-8.0.0-${BUILD_NUM}-noCPAN"
 
 CPANKEEP="
 	DBIx/
@@ -182,7 +181,6 @@ src_install() {
 	# Compiled CPAN module go under lib as they are arch-specific
 	dodir "/usr/lib/logitechmediaserver/CPAN"
 #	cp -r CPAN/arch "${D}/usr/lib/squeezeboxserver/CPAN" || die "Unable to install compiled CPAN modules"
-
 
 	# Preseve some of the Squeezebox Server-packaged CPAN modules that Gentoo
 	# doesn't provide ebuilds for.
@@ -320,10 +318,10 @@ pkg_postinst() {
 	# Album art requires PNG and JPEG support from GD, so if it's not there
 	# then warn the user.  It's not mandatory as the user may not be using
 	# album art.
-  if ! has_version dev-perl/GD[jpeg] || \
-     ! has_version dev-perl/GD[png] || \
-     ! has_version media-libs/gd[jpeg] || \
-     ! has_version media-libs/gd[png]; then
+	if ! has_version dev-perl/GD[jpeg] || \
+		! has_version dev-perl/GD[png] || \
+		! has_version media-libs/gd[jpeg] || \
+		! has_version media-libs/gd[png]; then
 		ewarn "For correct operation of album art through Squeezebox Server's web"
 		ewarn "interface the GD library and Perl module must be built with PNG"
 		ewarn "and JPEG support.  If necessary you can add the following lines"

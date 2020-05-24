@@ -17,7 +17,6 @@
     <flag name='flac'>Enable support for flac</flag>
     <flag name='ogg'>Enable support for ogg</flag>
     <flag name='avahi'>Enable support for avahi</flag>
-    <flag name='bonjour'>Enable support for bonjour</flag>
     <flag name='alac'>Enable support for alac</flag>
   </use>
 </pkgmetadata>
