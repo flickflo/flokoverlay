@@ -1,7 +1,6 @@
-#!/sbin/runscript
-# Copyright 1999-2009 Gentoo Foundation
+#!/sbin/openrc-run
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/squeezeboxserver/files/squeezeboxserver.init.d,v 1.1 2009/11/25 22:52:25 lavajoe Exp $
 
 # These fit the Squeezebox Server ebuild and so shouldn't need to be changed;
 # user-servicable parts go in /etc/conf.d/squeezeboxserver.
